@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viatu - Shopping Cart</title>
-    <!-- Link to external CSS -->
-    <link href="style.css" rel="stylesheet">
+    <title>Your Cart - Viatu Hub</title>
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -18,12 +16,12 @@
             </div>
             <nav>
                 <a href="index.html">Home</a>
-                <a href="index.html#products">Products</a>
-                <a href="index.html#about">About</a>
-                <a href="index.html#contact">Contact</a>
+                <a href="cart.html">Cart</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
             </nav>
             <div class="header-icons">
-                <a href="login.html" class="icon-link" id="loginIcon">
+                <a href="login.html" class="icon-link">
                     <i class="fas fa-user"></i>
                 </a>
                 <a href="cart.html" class="icon-link">
@@ -35,22 +33,12 @@
     </header>
 
     <main>
-        <div class="cart-container">
-            <h1>Your Shopping Cart</h1>
-            <div id="loginPrompt" class="login-prompt" style="display: none;">
-                Please <a href="login.html">login</a> or <a href="register.html">register</a> to checkout.
-            </div>
-            <div id="cartItems">
-                <!-- Cart items will be dynamically added here -->
-            </div>
-            <div class="cart-summary">
-                <h2>Order Summary</h2>
-                <p>Subtotal: KES <span id="subtotal">0</span></p>
-                <p>VAT (16%): KES <span id="vat">0</span></p>
-                <p><strong>Total: KES <span id="total">0</span></strong></p>
-                <button id="checkoutBtn" class="checkout-btn">Checkout with M-PESA</button>
-            </div>
-        </div>
+        <section id="cart">
+            <h2>Your Cart</h2>
+            <div id="cartItems" class="cart-items"></div>
+            <div id="totalPrice" class="total-price">Total Price: KES 0</div>
+            <button id="checkoutButton">Checkout</button>
+        </section>
     </main>
 
     <footer>
@@ -62,9 +50,9 @@
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <a href="index.html">Home</a>
-                <a href="index.html#products">Products</a>
-                <a href="index.html#about">About</a>
-                <a href="index.html#contact">Contact</a>
+                <a href="#products">Products</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
             </div>
             <div class="footer-section">
                 <h3>Connect With Us</h3>
@@ -80,7 +68,6 @@
         </div>
     </footer>
 
-    <!-- Link to external JS -->
-    <script src="cart.js"></script>
+    <script src="cart.js" defer></script>
 </body>
 </html>
