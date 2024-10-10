@@ -37,7 +37,11 @@
             <h2>Your Cart</h2>
             <div id="cartItems" class="cart-items"></div>
             <div id="totalPrice" class="total-price">Total Price: KES 0</div>
-            <button id="checkoutButton">Checkout</button>
+            <form id="checkoutForm">
+                <label for="phoneNumber">Enter your phone number:</label>
+                <input type="tel" id="phoneNumber" required placeholder="e.g. 0797403831">
+                <button type="button" id="checkoutButton">Checkout with M-Pesa</button>
+            </form>
         </section>
     </main>
 
@@ -69,5 +73,6 @@
     </footer>
 
     <script src="cart.js" defer></script>
+    <script src="checkout.js" defer></script> <!-- Add this line -->
 </body>
 </html>
