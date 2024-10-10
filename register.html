@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Viatu Hub</title>
+    <title>Register - Viatu Hub</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,22 +11,26 @@
         <div class="logo-container">
             <img src="ab2.PNG" alt="Viatu Hub Logo" class="logo">
         </div>
-        <h2>Login</h2>
-        <form id="loginForm">
+        <h2>Register</h2>
+        <form id="registerForm">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" required>
             </div>
             <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" required>
             </div>
-            <button type="submit" class="button">Login</button>
+            <button type="submit" class="button">Register</button>
             <div class="link">
-                <p>Don't have an account? <a href="register.html">Register</a></p>
+                <p>Already have an account? <a href="login.html">Login</a></p>
             </div>
         </form>
     </div>
-    <script src="login.js" defer></script>
+    <script src="register.js" defer></script>
 </body>
 </html>
