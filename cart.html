@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHULACE - Shopping Cart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container h1 {
+            margin-left: 10px;
+            font-size: 24px;
+        }
+
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .header-icons a {
+            margin-left: 15px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 2rem 5%;
+        }
+
+        .cart-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .quantity-controls button {
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            border: none;
+            cursor: pointer;
+        }
+
+        .quantity-controls span {
+            margin: 0 10px;
+        }
+
+        .cart-summary {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+
+        .checkout-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 2rem 5%;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            margin-right: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-icons a {
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #555;
+        }
+
+        .login-prompt {
+            text-align: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: #ffe5e5;
+            border-radius: 5px;
+        }
+
+        .login-prompt a {
+            color: #ff4444;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="/api/placeholder/50/50" alt="SHULACE Logo" class="logo">
+                <h1>SHULACE</h1>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="index.html#products">Products</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+            <div class="header-icons">
+                <a href="login.html" class="icon-link" id="loginIcon">
+                    <i class="fas fa-user"></i>
+                </a>
+                <a href="cart.html" class="icon-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="cart-container">
+            <h1>Your Shopping Cart</h1>
+            <div id="loginPrompt" class="login-prompt" style="display: none;">
+                Please <a href="login.html">login</a> or <a href="register.html">register</a> to checkout.
+            </div>
+            <div id="cartItems">
+                <!-- Cart items will be dynamically added here -->
+            </div>
+            <div class="cart-summary">
+                <h2>Order Summary</h2>
+                <p>Subtotal: KES <span id="subtotal">0</span></p>
+                <p>VAT (16%): KES <span id="vat">0</span></p>
+                <p><strong>Total: KES <span id="total">0</span></strong></p>
+                <button id="checkoutBtn" class="checkout-btn">Checkout with M-PESA</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>SHULACE</h3>
+                <p>Step out in style, and total confidence.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="index.html#products">Products</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 SHULACE. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample product data
+        const products = [
+            { id: 1, name: 'Safari Boots', price: 3500, image: '/api/placeholder/300/300' },
+            { id: 2, name: 'Urban Sneakers', price: 2800, image: '/api/placeholder/300/300' },
+            { id: 3, name: 'Classic Loafers', price: 4200, image: '/api/placeholder/300/300' },
+            { id: 4, name: 'Running Shoes', price: 3200, image: '/api/placeholder/300/300' },
+            { id: 5, name: 'Casual Slip-ons', price: 2500, image: '/api/placeholder/300/300' },
+            { id: 6, name: 'Hiking Boots', price: 5000, image: '/api/placeholder/300/300' },
+            { id: 7, name: 'Canvas Shoes', price: 2000, image: '/api/placeholder/300/300' },
+            { id: 8, name: 'Formal Oxfords', price: 4500, image: '/api/placeholder/300/300' },
+            { id: 9, name: 'Sports Trainers', price: 3800, image: '/api/placeholder/300/300' },
+            { id: 10, name: 'Desert Boots', price: 3900, image: '/api/placeholder/300/300' }
+        ];
+
+        let cart = [];
+        let isLoggedIn = false; // This would normally be set based on actual login status
+
+        function loadCart() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCartDisplay();
+            }
+        }
+
+        function updateCartDisplay() {
+            const cartItemsDiv = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            cartItemsDiv.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const product = products.find(p => p.id === item.id);
+                const itemTotal = product.price * item.quantity;
+                total += itemTotal;
+
+                const cartItemHTML = `
+                    <div class="cart-item">
+                        <img src="${product.image}" alt="${product.name}">
+                        <div class="cart-item-details">
+                            <h3>${product.name}</h3>
+                            <p>Price: KES ${product.price}</p>
+                            <div class="quantity-controls">
+                                <button onclick="updateQuantity(${product.id}, ${item.quantity - 1})">-</button>
+                                <span>${item.quantity}</span>
+                                <button onclick="updateQuantity(${product.id}, ${item.quantity + 1})">+</button>
+                            </div>
+                            <p>Subtotal: KES ${itemTotal}</p>
+                        </div>
+                    </div>
+                `;
+                cartItemsDiv.innerHTML += cartItemHTML;
+            });
+
+            const vat = total * 0.16;
+            const totalWithVat = total + vat;
+
+            document.getElementById('subtotal').textContent = total.toFixed(2);
+            document.getElementById('vat').textContent = vat.toFixed(2);
+            document.getElementById('total').textContent = totalWithVat.toFixed(2);
+            cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+            // Update checkout button and login prompt
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            const loginPrompt = document.getElementById('loginPrompt');
+            
+            if (!isLoggedIn) {
+                checkoutBtn.disabled = true;
+                loginPrompt.style.display = 'block';
+            } else {
+                checkoutBtn.disabled = false;
+                loginPrompt.style.display = 'none';
+            }
+        }
+
+        function updateQuantity(productId, newQuantity) {
+            if (newQuantity < 1) {
+                cart = cart.filter(item => item.id !== productId);
+            } else {
+                const itemIndex = cart.findIndex(item => item.id === productId);
+                if (itemIndex !== -1) {
+                    cart[itemIndex].quantity = newQuantity;
+                }
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartDisplay();
+        }
+
+        document.getElementById('checkoutBtn').addEventListener('click', function() {
+            if (isLoggedIn) {
+                // Simulating M-PESA payment process
+                alert('Redirecting to M-PESA payment...');
+                // After successful payment:
+                window.location.href = 'thank-you.html';
+            }
+        });
+
+        // Load cart on page load
+        window.addEventListener('load', loadCart);
+    </script>
+</body>
+</html>
